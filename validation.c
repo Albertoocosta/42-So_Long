@@ -34,3 +34,59 @@ int	check_map(char *filename)
 		ft_error("File not .ber");
 	return (0);
 }
+
+int	check_colexit(t_game *game)
+{
+	int	i;
+	int	j;
+	int exit;
+
+	i = 0;
+	j = 0;
+	exit = 0;
+	while(i < game->height)
+	{
+		j = 0; 
+		while (j < game->width)
+		{
+			if (game->map->matrix[i][j] == 'C')
+				game->map->n_coletables++;
+			if (game->map->matrix[i][j] == 'E')
+			{
+				if (exit == 1)
+					return (1);
+				exit = 1;
+			}
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	check_player(t_game *game)
+{
+	int	i;
+	int	j;
+	int player;
+
+	i = 0;
+	j = 0;
+	player = 0;
+	while(i < game->height)
+	{
+		j = 0;
+		while (j < game->width)
+		{
+			if (game->map->matrix[i][j] == 'P')
+			{
+				if (player == 1)
+					return (1);
+				player = 1;
+			}
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}

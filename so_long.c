@@ -75,14 +75,21 @@ void	map_init(int fd, char *file_path)
 	game = malloc(sizeof(t_game));
 	if (!game)
 		ft_error("Error to alocate map");
+	ft_memset(game, 0, sizeof(t_game));
 	get_dimensions(game, fd);
 	fd = open(file_path, O_RDONLY, 0);
 	map = malloc(sizeof(t_map));
 	if (!map)
 		ft_error("Error to alocate map");
+	ft_memset(map, 0, sizeof(t_map));
 	game->map = map;
 	matrixfill(game, fd);
-	
+	if ((check_colexit(game) != 0) || (check_player(game) != 0))
+	{
+		free(map);
+		free(game);
+		ft_error("Invalid resources");
+	}
 	for (int i = 0; i < game->height; i++) {
         for (int j = 0; j < game->width; j++) {
             printf("%c ", map->matrix[i][j]);  // Imprime cada elemento seguido de um espaço

@@ -4,6 +4,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <stdbool.h>
 # include <math.h>
 # include <fcntl.h>
 # include "../Libft/libft.h"
@@ -28,6 +29,7 @@ typedef struct s_map
 {
 
 	char	**matrix;
+	int		n_coletables;
 }				t_map;
 
 typedef struct s_img
@@ -60,6 +62,8 @@ void	freematrix(t_game *game, int fd, int height, char *message);
 int	width_check(t_game *game, char *clean_line, int map_line, int width_error);
 int	check_map(char *filename);
 int	input_check(int argc, char *filename);
+int	check_player(t_game *game);
+int	check_colexit(t_game *game);
 
 //game.c
 void	set_matrix(t_map *map, char *clean_line, int height);
